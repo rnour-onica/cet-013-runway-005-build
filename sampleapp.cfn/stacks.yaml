@@ -1,0 +1,27 @@
+namespace: ${namespace}
+stacker_bucket: ${stacker_bucket_name}
+VPCCIDR: ${VPCCIDR}
+firstPublicSubnetCIDR: ${firstPublicSubnetCIDR}
+firstPrivateSubnetCIDR: ${firstPrivateSubnetCIDR}
+secondPublicSubnetCIDR: ${secondPublicSubnetCIDR}
+secondPrivateSubnetCIDR: ${secondPrivateSubnetCIDR}
+
+sys_path: ./
+
+stacks:
+  vpc-cfn:
+    template_path: templates/cet-005-vpc-cfn.yaml # also supports json templates
+    variables:
+      VPCCIDR: ${VPCCIDR}
+      firstPublicSubnetCIDR: ${firstPublicSubnetCIDR}
+      firstPrivateSubnetCIDR: ${firstPrivateSubnetCIDR}
+      secondPublicSubnetCIDR: ${secondPublicSubnetCIDR}
+      secondPrivateSubnetCIDR: ${secondPrivateSubnetCIDR}
+  servers-cfn:
+    template_path: templates/cet-005-servers-cfn.yaml # also supports json templates
+    variables:
+      VPC: ${output vpc-cfn::VPC}
+      PublicSubnet1Id: ${output vpc-cfn::firstPublicSubnet}
+      PublicSubnet2Id: ${output vpc-cfn::secondPublicSubnet}
+      PrivateSubnet1Id: ${output vpc-cfn::firstPrivateSubnet}
+      PrivateSubnet2Id: ${output vpc-cfn::secondPrivateSubnet}
