@@ -6,16 +6,3 @@ deployments:
     regions:
       - us-east-1
 
-## first comment test
-## second comment
-## third change
-## after runway install
-## after chmod
-## test new command shell
-## test 1
-## test 2
-## test 3
-## add env var
-## test deploy
-## add IAM role 1
-## add new role
